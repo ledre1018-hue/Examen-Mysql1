@@ -88,3 +88,14 @@ CREATE TABLE Transaccion (
     FOREIGN KEY (id_miembro) REFERENCES Miembro(id_miembro)
         ON DELETE CASCADE ON UPDATE CASCADE
 );
+
+START TRANSACTION;
+
+INSERT INTO Transaccion (id_libro, id_miembro, fecha_prestamo, estado)
+VALUES (3, 2, CURDATE(), 'prestado');
+
+UPDATE Libro
+SET disponibilidad = FALSE
+WHERE id_libro = 3;
+
+COMMIT;
